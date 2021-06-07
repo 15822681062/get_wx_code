@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>微信公众号</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1 style="width:100%;height:100px;font-size:50px;">一、获取公众号微信code</h1>
+	<!-- 配置appid -->
+	<div>
+		<label style="display:inline-block;width:22%;font-size:40px;">appid：</label>
+		<input style="width:75%;height:100px;line-height: 100px;border: 1px solid black;font-size:40px;" type="text" name="appid" id="appid">
+	</div>
+
+	<!-- 配置回调地址 -->
+	<div style="margin-top: 20px;">
+		<label style="display:inline-block;width:22%;font-size:40px;">回调地址：</label>
+		<input style="width:75%;height:100px;line-height: 100px;border: 1px solid black;font-size:40px;" type="text" name="redirect_uri" id="redirect_uri">
+	</div>
+	
+	<button id="get_code" style="width:100%;height:100px;font-size:50px;background-color:green;color:white;margin-top: 20px;">点击获取微信公众号code</button>
+	<p style="font-size:50px;color:red;">注意：请点击上面的按钮获取code吗</p>
+	<!-- 虚线边框 -->
+	<div style="width:100%;height:0px;border-top:1px black dashed;margin-top: 30px;" />
+
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	//初始化
+	$(document).ready(function(){ 
+		var appid = '';
+		var redirect_uri = 'http://wx.wechat.com/getcode.html';
+		//初始化获取微信code
+	    $('#appid').val(appid);
+	    $('#redirect_uri').val(redirect_uri);
+	}); 
+	
+	//获取微信code
+	$('#get_code').click(function(){
+		var input_appid = $('#appid').val();
+		var httl_url = window.encodeURIComponent($('#redirect_uri').val());
+		var url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' + input_appid + '&redirect_uri=' + httl_url + '&response_type=code&scope=snsapi_base&state=123#wechat_redirect';
+		// 获取code
+		window.location.href = url;
+	});
+
+
+</script>
+</html>
